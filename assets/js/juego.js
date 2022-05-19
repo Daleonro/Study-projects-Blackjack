@@ -16,6 +16,7 @@ let puntosJugador = 0,
 
 const btnPedir = document.querySelector('#btnPedir');
 const puntosHtml = document.querySelectorAll('small');
+const divCartasJugador = document.querySelector('#player-cards');
 
 // Comentario
 
@@ -71,10 +72,18 @@ btnPedir.addEventListener('click', () => {
     puntosJugador = puntosJugador + valorCarta( carta );
     puntosHtml[0].innerText = puntosJugador;
 
-    
+    const imgCarta = document.createElement('img');
+    imgCarta.src = `assets/cartas/${ carta }.png`;
+    imgCarta.classList.add('carta');
+    divCartasJugador.append( imgCarta );
 
+    if( puntosJugador > 21 ) {
+        console.warn('Lo siento perdiste');
+        btnPedir.disabled = true;
+    } else if ( puntosJugador === 21 ) {
+        console.warn('Sacaste 21! Genial');
+        btnPedir.disabled = true;
+    }
 
-
-    return puntosJugador;
 });
 
