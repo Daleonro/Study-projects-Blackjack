@@ -9,6 +9,14 @@ let deck         = [];
 const tipos      = ['C', 'D', 'H', 'S'];
 const especiales = ['A', 'J', 'Q', 'K'];
 
+let puntosJugador = 0,
+    puntosComputadora = 0;
+
+// HTML References
+
+const btnPedir = document.querySelector('#btnPedir');
+const puntosHtml = document.querySelectorAll('small');
+
 // Comentario
 
 const crearDeck = () => {
@@ -42,10 +50,8 @@ const pedirCarta = () => {
 
     const carta = deck.pop();
 
-    console.log( deck );
-    console.log( carta );
     return carta;
-}
+};
 
 // pedirCarta();
 
@@ -54,8 +60,21 @@ const valorCarta = ( carta ) => {
     const valor = carta.substring(0, carta.length -1);
     puntos = ( isNaN( valor )) ? (puntos = ( valor === 'A' ) ? 11 : 10) : (puntos = valor * 1);
     return puntos;
-}
+};
 
-let valor = valorCarta( pedirCarta() );
+// Eventos
 
-console.log({ valor })
+btnPedir.addEventListener('click', () => {
+
+    const carta = pedirCarta();
+    
+    puntosJugador = puntosJugador + valorCarta( carta );
+    puntosHtml[0].innerText = puntosJugador;
+
+    
+
+
+
+    return puntosJugador;
+});
+
